@@ -226,6 +226,85 @@ var app = angular.module('app', [])
 	})
 ```
 
+# CLEANING YOUR SERVER
+
+Create the file controllers/api/posts.js:
+
+```javascript
+var Post = require('../../models/post')
+var router = require('express').Router();
+
+router.get('/api/posts', function (req, res, next) {
+	Post.find()
+		.sort('-date')
+		.exec(function(err, posts) {
+		if (err) { return next(err) }
+		res.json(posts)
+	})
+})
+
+
+router.post('/api/posts', function (req, res, next) {
+	console.log('post received!')
+	console.log(req.body.username)
+	console.log(req.body.body)
+	var post = new Post({
+		username: req.body.username,
+		body: req.body.body
+	})
+	post.save(function (err, post) {
+		// return next(err) doesn't work
+		if (err) { return next(err) }
+		res.json(201, post)
+		res.send()
+	})
+})
+
+module.exports = router
+```
+
+Then you can attach it to your app in server.js:
+```javascript
+app.use(require('./controllers/api/posts'))
+```
+# Namespacing Routers
+
+In server.js:
+```javascript
+app.use('/api/posts', require('./controllers/api/posts'))
+```
+
+Then in the controller:
+```javascript
+router.get('/', function(req, res, next) {
+	// ...
+router.post('/', function(req, res, next) {
+	// ...
+```	
+
+To do that for the static part of the app, write in server.js:
+```javascript
+app.use(require('./controllers/static'))
+```
+Then, in controllers/api/static.js:
+```javascript
+var router = require('express').Router()
+
+router.get('/', function(req, res) {
+	res.sendfile('layouts/posts.html')
+})
+
+module.exports = router;
+```
+
+
+## PREPARE TO DEVELOP
+
+> $ mongod
+
+> $ mongo social
+
+> $ node server.js
 
 
 ## TO NOT RESTART SERVER ALL THE TIME
