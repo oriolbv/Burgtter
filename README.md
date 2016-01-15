@@ -297,6 +297,46 @@ router.get('/', function(req, res) {
 module.exports = router;
 ```
 
+# CLEANING UP ANGULAR
+
+Create /assets/app.js and write the javascript function that was on the html:
+```javascript
+var app = angular.module('app', [])
+app.controller('PostsCtrl', function ($scope, $http) {
+    $scope.addPost = function() {
+    // In $scope.postBody we can found the value of the input (ng-model="postBody")
+        if ($scope.postBody) {
+            $http.post('/api/posts', {
+                username: 'orioloo',
+                body: $scope.postBody
+            }).success(function(post) {
+                $scope.posts.unshift(post)
+                // Clean the postBody in the model and view
+                $scope.postBody = null		
+            })
+        }
+    }
+    $http.get('/api/posts').success(function (posts) {
+        $scope.posts = posts
+    })
+})
+```
+
+Then, in /controllers/static.js add:
+```javascript
+var express = require('express')
+var router = express.Router()
+
+router.use(express.static(__dirname + '/../assets'))
+```
+
+Finally, in the html, add:
+```html
+<script src='/app.js'></script>
+```
+
+
+
 
 ## PREPARE TO DEVELOP
 
