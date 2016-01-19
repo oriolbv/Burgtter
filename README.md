@@ -368,6 +368,34 @@ app.service('PostsSvc', function($http) {
 })
 ```
 
+# Others
+
+## Gulp
+
+## Uglifier
+
+> $ npm install --save gulp-uglify
+
+## Annotate
+
+> $ npm install --save gulp-ng-annotate
+
+## Souce Maps
+
+Used to debug with the navegator:
+
+> $ npm install --save gulp-sourcemaps
+
+## CSS
+
+> $ npm install --save gulp-stylus
+
+## SERVER
+
+Now, to develop, write in the terminal:
+
+> $ gulp dev
+
 ## PREPARE TO DEVELOP
 
 > $ mongod
