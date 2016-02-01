@@ -368,25 +368,25 @@ app.service('PostsSvc', function($http) {
 })
 ```
 
-# Others
+## Others
 
-## Gulp
+# Gulp
 
-## Uglifier
+# Uglifier
 
 > $ npm install --save gulp-uglify
 
-## Annotate
+# Annotate
 
 > $ npm install --save gulp-ng-annotate
 
-## Souce Maps
+# Souce Maps
 
 Used to debug with the navegator:
 
 > $ npm install --save gulp-sourcemaps
 
-## CSS
+# CSS
 
 > $ npm install --save gulp-stylus
 
@@ -395,6 +395,18 @@ Used to debug with the navegator:
 Now, to develop, write in the terminal:
 
 > $ gulp dev
+
+## JWT with Express
+
+> $ npm install --save jwt-simple
+
+# Post
+
+> $ curl -X POST -d '{"username": "dickeyxxx"}' -H "Content-Type: application/json" localhost:3000/session
+
+# Get
+
+> $ curl -H "X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImRpY2tleXh4eCJ9.0w1RshE-2k7r94VmFZeSH_JBOTAg90EecznduMwaEGc" localhost:3000/user
 
 ## PREPARE TO DEVELOP
 
@@ -409,4 +421,6 @@ Now, to develop, write in the terminal:
 > $ npm install --global nodemon
 
 > $ nodemon server.js
+
+
 
