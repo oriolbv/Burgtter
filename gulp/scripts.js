@@ -6,7 +6,7 @@ var ngAnnotate = require('gulp-ng-annotate')
 
 
 gulp.task('js', function() {
-    gulp.src('ng/**/*.js')
+    gulp.src(['ng/module.js', 'ng/**/*.js'])
         .pipe(sourcemaps.init())
             .pipe(concat('app.js'))
             .pipe(ngAnnotate())
